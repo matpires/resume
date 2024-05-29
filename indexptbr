@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="A brazilian Data Professional resume!" />
+        <meta name="author" content="Matheos Pires" />
+        <title>Resume - Matheos</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <span class="d-block d-lg-none">Resume - Matheos Pires</span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="" /></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">PT-BR</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Sobre Mim</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#experience">Experiência</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Educação</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interesses</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#awards">Certificações</a></li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Page Content-->
+        <div class="container-fluid p-0">
+            <!-- About-->
+            <section class="resume-section" id="about">
+                <div class="resume-section-content">
+                    <h1 class="mb-0">
+                        Matheos
+                        <span class="text-primary">Pires</span>
+                    </h1>
+                    <div class="subheading mb-5">
+                        Curitiba, PR · +55 41 99610 9746 ·
+                        <a href="mailto:name@email.com">matheosmartoszat@gmail.com</a>
+                    </div>
+                    <p class="lead mb-5">Sou um profissional de Dados, com foco em construir e analisar tudo o que estiver disponível (e mais um pouco) afim de auxiliar a tomada de decisão com segurança e propriedade. Estou constantemente buscando aprimorar minhas habilidades, pois acredito que quanto maiores as habilidades, menores os desafios.<br><br>
+                    Gosto do que faço e dos resultados derivados de um esforço em equipe. Habilmente me adapto a novos cenários e desafios atraentes me estimulam a melhorar e crescer, por isso também sou aficionado por eles. Nesse sentido, gosto de citar a frase: "Se tudo parece estar sob controle, você não está indo rápido o suficiente" - Mario Andretti, lenda do automobilismo.</p>
+                    <div class="social-icons">
+                        <a class="social-icon" href="https://www.linkedin.com/in/matheospires"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="social-icon" href="https://www.instagram.com/matheospires/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Experience-->
+            <section class="resume-section" id="experience">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Experiência</h2>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Data Engineer</h3>
+                            <div class="subheading mb-3">Itaú Unibanco</div>
+                            <p>Utilizando a minha experiência como Analista e Engenheiro de Dados, assumi uma posição técnica em uma squad nova dentro da área de Marketing (MarTech). Sendo o objetivo da equipe entregar uma arquitetura e um produto analítico que faz uma ponte entre Marketing e Finanças para acompanhar resultados financeiros de campanhas de mídia, faço grande uso de ferramentas dentro do ambiente AWS, como S3, Athena, Step Functions, CloudWatch, Glue, Quicksight, além de Tableau e outras ferramentas necessárias para manutenção das entregas.</p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">Março 2022 - Presente</span></div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Business Intelligence Specialist</h3>
+                            <div class="subheading mb-3">Materialize (freelance)</div>
+                            <p>Atuação em diversos tipos de projetos para ajudar empresas a crescer usando seus dados para tomada de decisões. Principais ferramentas utilizadas: Power BI, Tableau, Metabase, Google Data Studio, SQL Server, MySQL, Amazon S3, Google Cloud Platform.</p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">Novembro 2020 - Presente</span></div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Data Architect & Engineer | People Analytics</h3>
+                            <div class="subheading mb-3">Paraná Banco</div>
+                            <p>Atuação em projetos de alta demanda e importância em torno da arquitetura de big data, desenvolvendo uma nova base de dados para solucionar os avanços comerciais junto aos clientes. Ao mesmo tempo estruturando dados sobre métricas e análises de RH, a fim de desenvolver KPIs, modelos de previsão e relatórios usados em reuniões de diretoria/conselho. Para concluir essas tarefas com sucesso, atualmente estou usando ferramentas como Pentaho Data Integration, Power BI, R Studio, MS SQL Server, e assim por diante.</p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">Agosto 2019 - Fevereiro 2022</span></div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Business Intelligence Analyst</h3>
+                            <div class="subheading mb-3">Rentcars.com</div>
+                            <p>Representante da equipe de BI dentro do departamento de Business Development; responsável por construir relatórios e dashboards de análise visual para a equipe de Account Managers através do Tableau; através de análises de grandes quantidades de dados e dos principais KPIs do time BizDev, gero informações que ajudam a empresa a tomar decisões mais embasadas; responsável pela análise e update da apresentação semanal de performance e tendências da diretoria e gerência; construção de apresentações regulares a serem utilizadas em reuniões com parceiros, a fim de melhorar o desempenho da locadora e do mercado onde ela está inserida; campanhas regulares para medir o índice de competitividade dos parceiros dentro dos nossos canais; interação constante com outros departamentos, principalmente com o Marketing, para desenvolver a empresa em novos mercados e trabalhar em conjunto para melhoria dos produtos e resultados; estudos sobre dados do mercado de turismo e aluguel de carros, além de comportamento do consumidor e estatísticas de turismo por região.</p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">Janeiro 2019 - Julho 2019</span></div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Market Intelligence Analyst</h3>
+                            <div class="subheading mb-3">Rentcars.com</div>
+                            <p>Responsável pela competitividade do Mercado LATAM; análise de desempenho por país; estudo de performance e diagnóstico com ações de melhorias por país e parceiro; definição e acompanhamento de taxa de conversão nos cenários Domestic e Inbound por mercado; indicação de ações relacionadas à evolução no volume dos mercados; elaboração de planilhas de dados e apresentações de relatórios; campanhas regulares para medir o índice de competitividade dos parceiros dentro dos nossos canais; interação com outros departamentos com foco em melhoria nos produtos e serviços oferecidos; estudos sobre comportamento do consumidor latino-americano e estatísticas de turismo por região.</p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">Março 2018 - Dezembro 2018</span></div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Market Intelligence Assistant</h3>
+                            <div class="subheading mb-3">Rentcars.com</div>
+                            <p></p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">Setembro 2016 - Fevereiro 2018</span></div>
+                    </div>
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Education-->
+            <section class="resume-section" id="education">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Educação</h2>
+                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">ESIC Business & Marketing School</h3>
+                            <div class="subheading mb-3">Tech Management & Leadership</div>
+                            <p><br></p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">2023 - 2024</span></div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">UNINTER Centro Univesitário Internacional</h3>
+                            <div class="subheading mb-3">Marketing</div>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">2015 - 2017</span></div>
+                    </div>
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Skills-->
+            <section class="resume-section" id="skills">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Skills</h2>
+                    <div class="subheading mb-3">Programming Languages & Tools</div>
+                    <ul class="list-inline dev-icons">
+                        <li class="list-inline-item"><i class="fas fa-database"></i></li>
+                        <li class="list-inline-item"><i class="fas fa-server"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-aws"></i></li>
+                        <li class="list-inline-item"><i class="fas fa-file-excel"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-google"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-google-drive"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-python"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-r-project"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-microsoft"></i></li>
+                        <li class="list-inline-item"><i class="fab fa-apple"></i></li>
+                    </ul>
+                    <div class="subheading mb-3">Workflow</div>
+                    <ul class="fa-ul mb-0">
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            ETL + ELT (Pentaho, Streamsets)
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Data Visualization (Tableau, PowerBI, Metabase, Google Data Studio)
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Data Engineer Process (Apache Airflow)
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-check"></i></span>
+                            Data Analysis (SQL, Python, R)
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Interests-->
+            <section class="resume-section" id="interests">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Interesses</h2>
+                    <p>Independente de ser um profissional da área de dados, eu aproveito a maior parte do meu tempo em atividades ao ar livre, como corrida, ciclismo, futebol e basquete. Também curto muito viajar para lugare novos e explorar cidades, culturas e gastronomias diferentes.</p>
+                    <p class="mb-0">Quando em casa, passo meu tempo livre com jogos, especialmente simuladores de automobilismo. Além disso, gosto muito de assistir séries e filmes com a minha família.</p>
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Awards-->
+            <section class="resume-section" id="awards">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Certificações</h2>
+                    <ul class="fa-ul mb-0">
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            <a href="https://cursos.alura.com.br/degree/certificate/74ff3ca7-a42a-4466-818f-7c158411a737">SQL Language Training using Microsoft SQL Server 2017</a>
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            <a href="https://cursos.alura.com.br/certificate/efb11936-4b7d-45ac-b0d0-60dc079902c4">Statistics - Know your Data using R</a>
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            <a href="https://cursos.alura.com.br/certificate/62d2565c-c162-40f7-b8e5-34a449c7cdaf">Python3: Introduction</a>
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            <a href="https://drive.google.com/file/d/18RKvMmpvsXuXH2qGVYnE8_6ratejnCU2/view">Bootcamp - People Analytics</a>
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            <a href="https://cursos.alura.com.br/certificate/3dd3a3bd-7cba-4718-bf87-cacfdee9cbd9">Pentaho Data Integration ETL Models</a>
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            <a href="https://cursos.alura.com.br/certificate/7fe69486-6f12-401c-a937-17b588f96169">Pentaho Data Integration ETL Transformations</a>
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            <a href="https://www.udemy.com/certificate/UC-11Y9D7P9/">Tableau 10 Advanced Training: Master Tableau in Data Science</a>
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-trophy text-warning"></i></span>
+                            <a href="https://www.udemy.com/certificate/UC-7P807EZ2/">Tableau 10 A-Z: Hands-On Tableau Training for Data Science</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
