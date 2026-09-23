@@ -236,7 +236,7 @@ a:hover{text-decoration:underline}
 .stats{
   display:flex; flex-wrap:wrap;
   gap:1px; background:var(--line); border:1px solid var(--line);
-  border-radius:10px; overflow:hidden; margin:1rem 0 0;
+  border-radius:10px; overflow:hidden;
 }
 /* flex em vez de grid: com colunas fixas sobrava celula vazia quando os
    cinco numeros nao cabiam numa linha so. Assim a ultima linha preenche. */
@@ -252,9 +252,8 @@ a:hover{text-decoration:underline}
 section{padding:4.5rem 0 0}
 h2.section{
   font-family:"Source Serif 4",Georgia,serif; font-size:1.6rem; font-weight:700;
-  letter-spacing:-.015em; margin:0 0 .4rem;
+  letter-spacing:-.015em; margin:0 0 1.6rem;
 }
-.section-note{color:var(--fg-dim); font-size:.9rem; margin:0 0 1.8rem}
 
 /* ------------------------------------------------- linha do tempo (gantt) */
 .gantt-chart{--label-w:8.5rem; --gap:1rem; margin-bottom:2.8rem}
@@ -365,7 +364,6 @@ footer .spacer{flex:1}
   <section class="reveal" id="numbersSection">
     <div class="wrap">
       <h2 class="section">In numbers</h2>
-      <p class="section-note">Every figure below also appears in the resume itself.</p>
       <div class="stats" id="stats"></div>
     </div>
   </section>
@@ -853,7 +851,7 @@ window.RESUME_DATA = {
   "languages": "Languages"
  }
 };
-const STR = {"experience": "Experience", "skills": "Skills", "education": "Education", "certificates": "Certifications", "languages": "Languages", "numbers": "In numbers", "numbers_note": "Every figure below also appears in the resume itself.", "career": "Career", "credentials": "Education & certifications", "export": "Export PDF", "onepage": "One-page version", "email": "Email", "lang": "Português", "other": "pt", "description": "Resume of Matheos Pires, People Analytics and data visualization."};
+const STR = {"experience": "Experience", "skills": "Skills", "education": "Education", "certificates": "Certifications", "languages": "Languages", "numbers": "In numbers", "career": "Career", "credentials": "Education & certifications", "export": "Export PDF", "onepage": "One-page version", "email": "Email", "lang": "Português", "other": "pt", "description": "Resume of Matheos Pires, People Analytics and data visualization."};
 const VARIANT = "people_analytics";
 </script>
 <script>
