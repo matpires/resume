@@ -255,24 +255,32 @@ h2.section{
 .section-note{color:var(--fg-dim); font-size:.9rem; margin:0 0 1.8rem}
 
 /* ------------------------------------------------- linha do tempo (gantt) */
-.gantt{display:flex; flex-direction:column; gap:.5rem; margin-bottom:2.5rem}
-.gantt-row{display:grid; grid-template-columns:8.5rem 1fr; gap:1rem; align-items:center}
+.gantt-chart{--label-w:8.5rem; --gap:1rem; margin-bottom:2.8rem}
+.gantt-plot{position:relative}
+.gantt{display:flex; flex-direction:column; gap:.5rem}
+.gantt-row{display:grid; grid-template-columns:var(--label-w) 1fr; gap:var(--gap); align-items:center}
 .gantt-label{font-size:.85rem; color:var(--fg-dim); text-align:right}
 .gantt-track{background:var(--surface); border-radius:5px; height:2.1rem; position:relative}
 .gantt-bar{
   position:absolute; top:0; bottom:0; border-radius:5px;
-  background:linear-gradient(90deg, var(--brand-dim), rgba(61,220,151,.3));
+  background:linear-gradient(90deg, var(--brand-dim), rgba(61,220,151,.32));
   border:1px solid rgba(61,220,151,.45);
-  display:flex; align-items:center; padding:0 .7rem;
-  font-size:.8rem; color:var(--fg); white-space:nowrap; overflow:hidden;
   transform-origin:left center; transform:scaleX(0); transition:transform .8s cubic-bezier(.2,.7,.3,1);
 }
 .in .gantt-bar{transform:scaleX(1)}
-.gantt-axis{
-  display:grid; grid-template-columns:8.5rem 1fr; gap:1rem;
-  font-size:.75rem; color:var(--fg-dim); margin-top:.2rem;
+
+/* grade e rotulos caem na posicao real do ano dentro do periodo */
+.gantt-grid{
+  position:absolute; left:calc(var(--label-w) + var(--gap)); right:0; top:0; bottom:0;
+  pointer-events:none;
 }
-.gantt-axis .ticks{display:flex; justify-content:space-between}
+.gantt-grid i{position:absolute; top:0; bottom:0; width:1px; background:var(--line)}
+.gantt-axis{
+  display:grid; grid-template-columns:var(--label-w) 1fr; gap:var(--gap);
+  font-size:.75rem; color:var(--fg-dim); margin-top:.5rem;
+}
+.gantt-axis .ticks{position:relative; height:1em}
+.gantt-axis .ticks span{position:absolute; transform:translateX(-50%); white-space:nowrap}
 
 /* ------------------------------------------------------------- empregos */
 .job-card{
@@ -313,7 +321,7 @@ footer .spacer{flex:1}
 
 @media (max-width:720px){
   .two-col{grid-template-columns:1fr; gap:1rem}
-  .gantt-row,.gantt-axis{grid-template-columns:5.5rem 1fr; gap:.6rem}
+  .gantt-chart{--label-w:5.5rem; --gap:.6rem}
   .gantt-label{font-size:.78rem}
   .hero{padding-top:3.5rem}
   .topbar a.plain.hide-sm{display:none}
@@ -360,7 +368,6 @@ footer .spacer{flex:1}
   <section>
     <div class="wrap">
       <h2 class="section">Career</h2>
-      <p class="section-note">Bar width is the real length of each role.</p>
       <div class="reveal" id="gantt"></div>
       <div id="jobs"></div>
     </div>
@@ -369,7 +376,6 @@ footer .spacer{flex:1}
   <section>
     <div class="wrap">
       <h2 class="section">Skills</h2>
-      <p class="section-note">No proficiency percentages: a number I cannot defend is not a number.</p>
       <div class="reveal" id="skills"></div>
     </div>
   </section>
@@ -422,7 +428,8 @@ window.RESUME_DATA = {
     "analytics",
     "viz",
     "data",
-    "cloud"
+    "cloud",
+    "learning"
    ]
   }
  },
@@ -455,7 +462,6 @@ window.RESUME_DATA = {
    "items": [
     "Data modeling",
     "ETL / ELT",
-    "Snowflake",
     "Airflow",
     "Pentaho",
     "SQL Server",
@@ -464,13 +470,19 @@ window.RESUME_DATA = {
    ]
   },
   "cloud": {
-   "label": "Cloud",
+   "label": "Cloud (AWS)",
    "items": [
     "AWS S3",
     "AWS Athena",
     "AWS Glue",
     "AWS Step Functions",
-    "AWS CloudWatch",
+    "AWS CloudWatch"
+   ]
+  },
+  "learning": {
+   "label": "In study",
+   "items": [
+    "Snowflake",
     "GCP Cloud Storage",
     "BigQuery",
     "Dataflow",
@@ -832,7 +844,7 @@ window.RESUME_DATA = {
   "languages": "Languages"
  }
 };
-const STR = {"experience": "Experience", "skills": "Skills", "education": "Education", "certificates": "Certifications", "languages": "Languages", "numbers": "In numbers", "numbers_note": "Every figure below also appears in the resume itself.", "career": "Career", "career_note": "Bar width is the real length of each role.", "skills_note": "No proficiency percentages: a number I cannot defend is not a number.", "credentials": "Education & certifications", "export": "Export PDF", "onepage": "One-page version", "email": "Email", "lang": "Português", "other": "pt", "description": "Resume of Matheos Pires, People Analytics and data visualization."};
+const STR = {"experience": "Experience", "skills": "Skills", "education": "Education", "certificates": "Certifications", "languages": "Languages", "numbers": "In numbers", "numbers_note": "Every figure below also appears in the resume itself.", "career": "Career", "credentials": "Education & certifications", "export": "Export PDF", "onepage": "One-page version", "email": "Email", "lang": "Português", "other": "pt", "description": "Resume of Matheos Pires, People Analytics and data visualization."};
 const VARIANT = "people_analytics";
 </script>
 <script>
@@ -973,23 +985,36 @@ function buildGantt(){
   const min = new Date(Math.min(...jobs.map(j=>+j.from)));
   const max = new Date(Math.max(...jobs.map(j=>+j.to)));
   const span = +max - +min;
-  const rows = jobs.slice().reverse().map(j=>{
-    const left = ((+j.from - +min) / span) * 100;
-    const width = ((+j.to - +j.from) / span) * 100;
-    return `<div class="gantt-row">
+  const pct = d => ((+d - +min) / span) * 100;
+
+  // A barra nao carrega texto: em periodo curto (Boston, um ano) a data era
+  // cortada no meio. As datas ficam no card de cada emprego, logo abaixo.
+  const rows = jobs.slice().reverse().map(j=>
+    `<div class="gantt-row">
       <div class="gantt-label">${esc(j.company)}</div>
       <div class="gantt-track">
-        <div class="gantt-bar" style="left:${left.toFixed(2)}%;width:${width.toFixed(2)}%">
-          ${esc(j.dates)}
-        </div>
-      </div></div>`;
-  }).join("");
+        <div class="gantt-bar" title="${esc(j.company)}: ${esc(j.dates)}"
+             style="left:${pct(j.from).toFixed(2)}%;width:${(pct(j.to) - pct(j.from)).toFixed(2)}%"></div>
+      </div></div>`).join("");
+
+  // Um tick por ano par que caiba dentro do periodo, na posicao real dele.
   const years = [];
-  for (let y = min.getFullYear(); y <= max.getFullYear(); y += 2) years.push(y);
+  for (let y = min.getFullYear() + 1; y <= max.getFullYear(); y++){
+    if (y % 2 === 0) years.push(y);
+  }
+  const ticks = years.map(y=>({y, p: pct(new Date(y, 0, 1))}))
+                     .filter(t => t.p >= 0 && t.p <= 100);
+
   document.getElementById("gantt").innerHTML =
-    `<div class="gantt">${rows}</div>
-     <div class="gantt-axis"><span></span><span class="ticks">${
-       years.map(y=>`<span>${y}</span>`).join("")}</span></div>`;
+    `<div class="gantt-chart">
+       <div class="gantt-plot">
+         <div class="gantt">${rows}</div>
+         <div class="gantt-grid">${
+           ticks.map(t=>`<i style="left:${t.p.toFixed(2)}%"></i>`).join("")}</div>
+       </div>
+       <div class="gantt-axis"><span></span><span class="ticks">${
+         ticks.map(t=>`<span style="left:${t.p.toFixed(2)}%">${t.y}</span>`).join("")}</span></div>
+     </div>`;
 }
 buildGantt();
 
