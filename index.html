@@ -297,7 +297,10 @@ h2.section{
 
 /* --------------------------------------------------------------- skills */
 .skill-group{margin-bottom:1.4rem}
-.skill-group h3{font-size:.8rem; text-transform:uppercase; letter-spacing:.1em; color:var(--fg-dim); margin:0 0 .6rem}
+.skill-group h3,.col-title{
+  font-size:.8rem; text-transform:uppercase; letter-spacing:.1em;
+  color:var(--fg-dim); margin:0 0 .8rem; font-weight:600;
+}
 .chips{display:flex; flex-wrap:wrap; gap:.4rem}
 .chip{
   border:1px solid var(--line); background:var(--surface); border-radius:99px;
@@ -429,7 +432,7 @@ window.RESUME_DATA = {
     "viz",
     "data",
     "cloud",
-    "learning"
+    "familiar"
    ]
   }
  },
@@ -479,15 +482,19 @@ window.RESUME_DATA = {
     "AWS CloudWatch"
    ]
   },
-  "learning": {
-   "label": "In study",
+  "familiar": {
+   "label": "Familiar with",
    "items": [
     "Snowflake",
+    "Azure",
     "GCP Cloud Storage",
     "BigQuery",
     "Dataflow",
     "Cloud Workflows",
-    "Cloud Monitoring"
+    "Cloud Monitoring",
+    "Alteryx",
+    "HRIS platforms",
+    "Jira"
    ]
   }
  },
@@ -1040,7 +1047,7 @@ document.getElementById("skills").innerHTML = V.skills.map(k=>{
 
 // ------------------------------------------------------------- formacao
 const col = (title, list) =>
-  `<div><h3 class="skill-group" style="margin-bottom:.8rem">${esc(title)}</h3>${
+  `<div><h3 class="col-title">${esc(title)}</h3>${
     list.map(e=>`<div class="item"><div class="main">${esc(e.main)}</div>
       <div class="sub">${esc(e.sub)}</div></div>`).join("")}</div>`;
 document.getElementById("credentials").innerHTML =
