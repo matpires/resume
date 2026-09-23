@@ -332,7 +332,7 @@ footer .spacer{flex:1}
     <a class="mark" href="#top">Matheos Pires</a>
     <span class="spacer"></span>
     <a class="plain hide-sm" href="get-resume/">One-page version</a>
-    <a class="plain" href="pt/" hreflang="pt">Português</a>
+    
     <button class="btn" id="exportBtn">Export PDF</button>
   </div>
 </header>
@@ -402,13 +402,14 @@ window.RESUME_DATA = {
   "location": "Curitiba, PR, Brazil",
   "linkedin": "linkedin.com/in/matheospires",
   "github": null,
-  "note": "Brazil-based"
+  "note": null
  },
  "variants": {
   "people_analytics": {
    "label": "People Analytics",
    "headline": "People Analytics | Workforce Analytics",
-   "summary": "Analytics professional with 8+ years turning workforce data into decisions executives act on. Currently owns the HR metric layer for a 60,000-employee global organization spanning 50+ countries, covering turnover, headcount, time-to-hire, internal mobility and development, read monthly by 200 users from HR teams to C-level. Built HR analytics from the ground up once before, at a 600-employee bank. Works daily in English with distributed teams.",
+   "summary": "Analytics professional with 10 years in data, working with HR and workforce data since 2019. Currently owns the HR metric layer for a 60,000-employee global organization spanning 50+ countries, covering turnover, headcount, time-to-hire, internal mobility and development, read monthly by 200 users from HR teams to C-level. Built HR analytics from the ground up once before, at a 600-employee bank. Works daily in English with distributed teams.",
+   "eyebrow": "HR and workforce data since 2019",
    "tag_priority": [
     "people",
     "hr",
@@ -434,7 +435,7 @@ window.RESUME_DATA = {
     "R",
     "People Analytics",
     "A/B and cohort analysis",
-    "Stakeholder requirements",
+    "C-level reporting",
     "Data storytelling"
    ]
   },
@@ -444,6 +445,7 @@ window.RESUME_DATA = {
     "Tableau",
     "Power BI",
     "Amazon QuickSight",
+    "Looker Studio",
     "Dashboard UX design",
     "Visualization standards & templates"
    ]
@@ -453,6 +455,7 @@ window.RESUME_DATA = {
    "items": [
     "Data modeling",
     "ETL / ELT",
+    "Snowflake",
     "Airflow",
     "Pentaho",
     "SQL Server",
@@ -467,7 +470,12 @@ window.RESUME_DATA = {
     "AWS Athena",
     "AWS Glue",
     "AWS Step Functions",
-    "AWS CloudWatch"
+    "AWS CloudWatch",
+    "GCP Cloud Storage",
+    "BigQuery",
+    "Dataflow",
+    "Cloud Workflows",
+    "Cloud Monitoring"
    ]
   }
  },
@@ -790,8 +798,8 @@ window.RESUME_DATA = {
  ],
  "highlights": [
   {
-   "number": 8,
-   "suffix": "+",
+   "number": 10,
+   "suffix": "",
    "label": "years in data"
   },
   {
@@ -810,7 +818,7 @@ window.RESUME_DATA = {
    "label": "monthly dashboard users"
   },
   {
-   "number": 50,
+   "number": 80,
    "suffix": "+",
    "label": "dashboards built"
   }
@@ -919,7 +927,7 @@ const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // ---------------------------------------------------------------- hero
 document.getElementById("eyebrow").textContent =
-  [M.location, M.note].filter(Boolean).join(" · ");
+  [M.location, V.eyebrow].filter(Boolean).join(" · ");
 document.getElementById("heroName").textContent = M.name;
 document.getElementById("heroRole").textContent = V.headline;
 document.getElementById("heroPitch").textContent = V.summary;
