@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matheos Pires — People Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ffffff;
+    --ink:#16191d;
+    --ink-soft:#5b646e;
+    --rule:#d5dae0;
+    --backdrop:#e9ebee;
+    --chrome-ink:#16191d;
+    --chrome-bg:#ffffff;
+    --accent:#1f4e46;
+    --flag:#f4e9cf;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+    --sans:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --backdrop:#14171a; --chrome-bg:#1d2125; --chrome-ink:#e6e9ec; --rule:#d5dae0;
+    }
+  }
+  :root[data-theme="dark"]{
+    --backdrop:#14171a; --chrome-bg:#1d2125; --chrome-ink:#e6e9ec;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--backdrop); color:var(--ink);
+    font-family:var(--serif); -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------------------------------------------------------- chrome (screen) */
+  .bar{
+    position:sticky; top:0; z-index:10;
+    display:flex; flex-wrap:wrap; gap:.5rem; align-items:center;
+    padding:.7rem 1rem; background:var(--chrome-bg); color:var(--chrome-ink);
+    border-bottom:1px solid rgba(128,138,148,.35);
+    font-family:var(--sans); font-size:.82rem;
+  }
+  .bar .spacer{flex:1 1 auto}
+  button{
+    font:inherit; cursor:pointer; padding:.42rem .8rem; border-radius:3px;
+    border:1px solid rgba(128,138,148,.5); background:transparent;
+    color:inherit; transition:background .12s,border-color .12s;
+  }
+  button:hover{background:rgba(128,138,148,.14)}
+  button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+  button[aria-pressed="true"]{
+    background:var(--accent); border-color:var(--accent); color:#fff; font-weight:500;
+  }
+  .ghost{border-style:dashed}
+  label.check{display:flex; align-items:center; gap:.35rem; cursor:pointer}
+
+  .notice{
+    max-width:52rem; margin:1rem auto -.4rem; padding:.7rem .9rem;
+    background:var(--flag); color:#4a3c14; border-left:3px solid #c9a227;
+    font-family:var(--sans); font-size:.78rem; line-height:1.5; border-radius:2px;
+  }
+  .notice b{font-weight:600}
+
+  /* ------------------------------------------------------------------- sheet */
+  .sheet{
+    max-width:52rem; margin:1.4rem auto 4rem; padding:3.2rem 3.4rem;
+    background:var(--paper); color:var(--ink);
+    box-shadow:0 1px 3px rgba(20,25,30,.14), 0 12px 32px rgba(20,25,30,.09);
+  }
+
+  .name{
+    font-size:2.5rem; font-weight:700; letter-spacing:-.015em;
+    line-height:1.05; margin:0;
+  }
+  .headline{
+    font-size:1.02rem; font-weight:400; color:var(--ink-soft);
+    margin:.35rem 0 0;
+  }
+  .contact{
+    font-size:.86rem; color:var(--ink-soft); margin:.9rem 0 0; line-height:1.7;
+  }
+  .contact a{color:inherit}
+
+  .summary{
+    font-size:.98rem; line-height:1.62; margin:1.5rem 0 0;
+    padding-top:1.4rem; border-top:1px solid var(--rule);
+  }
+
+  h2{
+    font-size:.95rem; font-weight:700; letter-spacing:.01em;
+    margin:2.1rem 0 .1rem; padding-bottom:.3rem;
+    border-bottom:1.5px solid var(--ink);
+  }
+
+  .job{margin-top:1.15rem; break-inside:avoid}
+  .job-head{display:flex; justify-content:space-between; gap:1rem; align-items:baseline}
+  .job-title{font-size:1rem; font-weight:700; margin:0}
+  .job-org{font-size:.92rem; color:var(--ink-soft); margin:.1rem 0 0}
+  .job-dates{font-size:.82rem; color:var(--ink-soft); white-space:nowrap}
+  ul{margin:.45rem 0 0; padding-left:1.1rem}
+  li{font-size:.92rem; line-height:1.55; margin-bottom:.3rem}
+  li::marker{color:var(--ink-soft)}
+  li.soft{background:linear-gradient(transparent 62%, #ffe9a8 62%)}
+
+  .cols{display:grid; grid-template-columns:1fr 1fr; gap:.2rem 2rem; margin-top:.7rem}
+  .entry{margin-bottom:.6rem; break-inside:avoid}
+  .entry-main{font-size:.92rem; font-weight:600}
+  .entry-sub{font-size:.85rem; color:var(--ink-soft)}
+
+  .skillrow{display:flex; gap:.6rem; font-size:.92rem; line-height:1.55; margin:.4rem 0}
+  .skillrow dt{font-weight:700; flex:0 0 9.5rem}
+  .skillrow dd{margin:0; color:var(--ink)}
+
+  @media (max-width:640px){
+    .sheet{padding:1.9rem 1.4rem; margin:.8rem .6rem 3rem}
+    .name{font-size:1.9rem}
+    .cols{grid-template-columns:1fr}
+    .skillrow{flex-direction:column; gap:.05rem}
+    .skillrow dt{flex:none}
+    .job-head{flex-direction:column}
+  }
+
+  /* ------------------------------------------------------------------- print */
+  @page{margin:14mm 15mm}
+  @media print{
+    :root{--backdrop:#fff; --ink:#000; --ink-soft:#3a4149}
+    body{background:#fff}
+    .bar,.notice{display:none !important}
+    .sheet{box-shadow:none; margin:0; padding:0; max-width:none}
+    li.soft{background:none}
+    h2{margin-top:1.5rem}
+    a{text-decoration:none; color:inherit}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <span class="spacer"></span>
+  <button class="ghost" id="printBtn">Save as PDF</button>
+</div>
+
+<main class="sheet" id="sheet"></main>
+
+<script>
+let DATA = null;
+
+const esc = s => String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+function pick(bullets, priority, max){
+  const score = b => b.tags.reduce((t,tag)=>{
+    const i = priority.indexOf(tag);
+    return t + (i === -1 ? 0 : priority.length - i);
+  },0);
+  const chosen = bullets.map((b,i)=>({b,i,s:score(b)}))
+    .sort((x,y)=> y.s - x.s || x.i - y.i)
+    .slice(0,max)
+    .sort((x,y)=> x.i - y.i);
+  return chosen.map(x=>x.b);
+}
+
+function entries(list){
+  return `<div class="cols">${list.map(e=>
+    `<div class="entry"><div class="entry-main">${esc(e.main)}</div>
+     <div class="entry-sub">${esc(e.sub)}</div></div>`).join("")}</div>`;
+}
+
+function render(key){
+  const v = DATA.variants[key], m = DATA.meta;
+  const contact = [m.email, m.phone, m.location, m.linkedin, m.github, m.note]
+    .filter(Boolean).join(" · ");
+
+  const jobs = DATA.experience.map(j=>{
+    const bs = pick(j.bullets, v.tag_priority, v.max);
+    return `<div class="job">
+      <div class="job-head">
+        <div><p class="job-title">${esc(j.title)}</p>
+        <p class="job-org">${esc(j.company)}${j.context?" · "+esc(j.context):""}</p></div>
+        <span class="job-dates">${esc(j.dates)}</span>
+      </div>
+      <ul>${bs.map(b=>`<li data-c="${b.c}">${esc(b.text)}</li>`).join("")}</ul>
+    </div>`;
+  }).join("");
+
+  const skills = v.skills.map(k=>{
+    const s = DATA.skills[k];
+    return `<div class="skillrow"><dt>${esc(s.label)}</dt><dd>${esc(s.items.join(" · "))}</dd></div>`;
+  }).join("");
+
+  document.getElementById("sheet").innerHTML = `
+    <h1 class="name">${esc(m.name)}</h1>
+    <p class="headline">${esc(v.headline)}</p>
+    <p class="contact">${esc(contact)}</p>
+    <p class="summary">${esc(v.summary)}</p>
+    <h2>Experience</h2>${jobs}
+    <h2>Skills</h2><dl>${skills}</dl>
+    <h2>Education</h2>${entries(DATA.education)}
+    <h2>Certifications</h2>${entries(DATA.certificates)}
+    <h2>Languages</h2><p class="contact" style="margin-top:.5rem">${esc(DATA.languages)}</p>`;
+
+  document.title = `Matheos Pires — ${v.label}`;
+  applyFlags();
+}
+
+function applyFlags(){
+  const box = document.getElementById("flagSoft");
+  const on = !!(box && box.checked);
+  document.querySelectorAll("#sheet li").forEach(li=>{
+    li.classList.toggle("soft", on && li.dataset.c !== "exact");
+  });
+}
+
+function buildNotice(){
+  const el = document.getElementById("notice");
+  if (!el) return;
+  const open = (DATA && DATA.open_questions) || [];
+  if (!open.length){ el.style.display = "none"; return; }
+  el.innerHTML = `<b>Em aberto no master.yaml:</b><ul style="margin:.4rem 0 0;padding-left:1.1rem">`
+    + open.map(q=>`<li>${esc(q)}</li>`).join("")
+    + `</ul>O curriculo ja e utilizavel assim. Esta tarja nao vai para o PDF.`;
+}
+
+document.querySelectorAll("[data-variant]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll("[data-variant]").forEach(b=>b.setAttribute("aria-pressed","false"));
+    btn.setAttribute("aria-pressed","true");
+    render(btn.dataset.variant);
+  });
+});
+const flagBox = document.getElementById("flagSoft");
+if (flagBox) flagBox.addEventListener("change", applyFlags);
+const printBtn = document.getElementById("printBtn");
+if (printBtn) printBtn.addEventListener("click",()=>window.print());
+
+window.RESUME_DATA = {
+ "meta": {
+  "name": "Matheos Pires",
+  "email": "matheosmartoszat@gmail.com",
+  "phone": null,
+  "location": "Curitiba, PR, Brazil",
+  "linkedin": "linkedin.com/in/matheospires",
+  "github": null,
+  "note": "Brazil-based"
+ },
+ "variants": {
+  "people_analytics": {
+   "label": "People Analytics",
+   "headline": "People Analytics | Workforce Analytics",
+   "summary": "Analytics professional with 8+ years turning workforce data into decisions executives act on. Currently owns the HR metric layer for a 60,000-employee global organization spanning 50+ countries, covering turnover, headcount, time-to-hire, internal mobility and development, read monthly by 200 users from HR teams to C-level. Built HR analytics from the ground up once before, at a 600-employee bank. Works daily in English with distributed teams.",
+   "tag_priority": [
+    "people",
+    "hr",
+    "stakeholder",
+    "viz",
+    "governance"
+   ],
+   "max": 4,
+   "skills": [
+    "analytics",
+    "viz",
+    "data",
+    "cloud"
+   ]
+  }
+ },
+ "skills": {
+  "analytics": {
+   "label": "Analytics",
+   "items": [
+    "SQL",
+    "Python",
+    "R",
+    "People Analytics",
+    "A/B and cohort analysis",
+    "Stakeholder requirements",
+    "Data storytelling"
+   ]
+  },
+  "viz": {
+   "label": "Visualization & BI",
+   "items": [
+    "Tableau",
+    "Power BI",
+    "Amazon QuickSight",
+    "Dashboard UX design",
+    "Visualization standards & templates"
+   ]
+  },
+  "data": {
+   "label": "Data",
+   "items": [
+    "Data modeling",
+    "ETL / ELT",
+    "Airflow",
+    "Pentaho",
+    "SQL Server",
+    "Google Analytics",
+    "Google Ads"
+   ]
+  },
+  "cloud": {
+   "label": "Cloud",
+   "items": [
+    "AWS S3",
+    "AWS Athena",
+    "AWS Glue",
+    "AWS Step Functions",
+    "AWS CloudWatch"
+   ]
+  }
+ },
+ "experience": [
+  {
+   "company": "Boston Scientific",
+   "title": "Tableau Developer",
+   "context": "Global HR Analytics",
+   "dates": "Sep 2025 — Present",
+   "bullets": [
+    {
+     "id": "bsc-01",
+     "tags": [
+      "people",
+      "viz",
+      "scale",
+      "stakeholder"
+     ],
+     "c": "exact",
+     "text": "Build and maintain the Tableau reporting layer covering the full workforce of a 60,000-employee global medtech company with people in 50+ countries: most dashboards compile 1-2M+ rows per refresh and average 200 monthly users, from HR teams and HRBPs to business leaders up to C-level."
+    },
+    {
+     "id": "bsc-02",
+     "tags": [
+      "people",
+      "hr"
+     ],
+     "c": "exact",
+     "text": "Own the core HR metric set: turnover, headcount, time-to-hire, promotions, terminations by reason, training and development rates, and internal mobility across organizations and populations."
+    },
+    {
+     "id": "bsc-03",
+     "tags": [
+      "stakeholder",
+      "people",
+      "engineering"
+     ],
+     "c": "exact",
+     "text": "Run the full project lifecycle end to end, from requirements gathering with HR stakeholders through data architecture to the published dashboard."
+    },
+    {
+     "id": "bsc-04",
+     "tags": [
+      "people",
+      "governance",
+      "hr"
+     ],
+     "c": "exact",
+     "text": "Work with sensitive workforce data under privacy constraints, applying aggregation and access rules so HR analytics stay compliant."
+    },
+    {
+     "id": "bsc-05",
+     "tags": [
+      "viz",
+      "design",
+      "leadership"
+     ],
+     "c": "exact",
+     "text": "Defined dashboard design standards and reusable templates adopted by the HR Analytics team."
+    },
+    {
+     "id": "bsc-06",
+     "tags": [
+      "stakeholder",
+      "remote"
+     ],
+     "c": "exact",
+     "text": "Operate daily in English inside a distributed, multidisciplinary team of data specialists across time zones."
+    },
+    {
+     "id": "bsc-07",
+     "tags": [
+      "engineering",
+      "aws",
+      "pipeline"
+     ],
+     "c": "exact",
+     "text": "Build the underlying data layer on AWS (S3, Athena, Glue, Step Functions) feeding the workforce dashboards."
+    }
+   ]
+  },
+  {
+   "company": "Itaú Unibanco",
+   "title": "Senior Analytics Engineer",
+   "context": "Business banking (PJ) · MarTech squad",
+   "dates": "Mar 2022 — Sep 2025",
+   "bullets": [
+    {
+     "id": "itau-01",
+     "tags": [
+      "engineering",
+      "scale",
+      "pipeline",
+      "viz"
+     ],
+     "c": "exact",
+     "text": "Processed Google Analytics tables of 1-2M rows per day into curated models supporting 3, 6 and 12-month trend analysis without loss of dashboard performance or accuracy."
+    },
+    {
+     "id": "itau-02",
+     "tags": [
+      "engineering",
+      "aws",
+      "pipeline"
+     ],
+     "c": "exact",
+     "text": "Built and operated AWS pipelines (S3, Athena, Glue, Step Functions, CloudWatch) feeding QuickSight and Tableau."
+    },
+    {
+     "id": "itau-03",
+     "tags": [
+      "stakeholder",
+      "viz"
+     ],
+     "c": "exact",
+     "text": "Technical member of a newly formed MarTech squad, building the bridge between Marketing and Finance to measure the financial performance of media campaigns."
+    },
+    {
+     "id": "itau-04",
+     "tags": [
+      "leadership",
+      "stakeholder"
+     ],
+     "c": "exact",
+     "text": "Led a team of 3 analysts and mentored 10 interns on the data visualization front."
+    },
+    {
+     "id": "itau-05",
+     "tags": [
+      "viz",
+      "design",
+      "leadership"
+     ],
+     "c": "exact",
+     "text": "Defined visualization standards and templates adopted across the team."
+    },
+    {
+     "id": "itau-06",
+     "tags": [
+      "stakeholder",
+      "scale"
+     ],
+     "c": "exact",
+     "text": "Delivered analytics consumed across the entire business banking division."
+    },
+    {
+     "id": "itau-07",
+     "tags": [
+      "viz",
+      "engineering",
+      "scale"
+     ],
+     "c": "exact",
+     "text": "Tuned large extracts and query patterns so dashboards stayed responsive at multi-million-row scale."
+    }
+   ]
+  },
+  {
+   "company": "Paraná Banco",
+   "title": "Data Engineer",
+   "context": "HR analytics & commercial campaigns",
+   "dates": "Aug 2019 — Feb 2022",
+   "bullets": [
+    {
+     "id": "pb-01",
+     "tags": [
+      "people",
+      "hr",
+      "founding"
+     ],
+     "c": "exact",
+     "text": "Built HR analytics from scratch at a 600-employee bank that had almost no structured people data, handling confidential employee records and standing up turnover, absenteeism, time-to-hire and workforce productivity metrics."
+    },
+    {
+     "id": "pb-02",
+     "tags": [
+      "people",
+      "pipeline",
+      "hr"
+     ],
+     "c": "exact",
+     "text": "Automated the recruiting team's tooling and reporting, giving them near real-time visibility of pipeline and interview activity."
+    },
+    {
+     "id": "pb-03",
+     "tags": [
+      "people",
+      "hr"
+     ],
+     "c": "exact",
+     "text": "Prototyped a predictive HR model and identified that source data quality could not support it; the work was shelved and later resumed by the team once the data foundation improved."
+    },
+    {
+     "id": "pb-04",
+     "tags": [
+      "stakeholder",
+      "leadership"
+     ],
+     "c": "exact",
+     "text": "Presented findings directly to C-level, with analyses reaching every area of the company."
+    },
+    {
+     "id": "pb-05",
+     "tags": [
+      "engineering",
+      "pipeline"
+     ],
+     "c": "exact",
+     "text": "Orchestrated automated data workflows in Airflow for commercial campaigns (dialer and CRM) and customer segmentation."
+    },
+    {
+     "id": "pb-06",
+     "tags": [
+      "engineering",
+      "pipeline"
+     ],
+     "c": "exact",
+     "text": "Designed data architecture for campaign execution and link tracking via Google Analytics, using Pentaho, Power BI, R Studio and SQL Server."
+    }
+   ]
+  },
+  {
+   "company": "Rentcars.com",
+   "title": "Business Intelligence Analyst",
+   "context": "First BI hire",
+   "dates": "Sep 2016 — Jul 2019",
+   "bullets": [
+    {
+     "id": "rc-01",
+     "tags": [
+      "founding",
+      "viz",
+      "tableau"
+     ],
+     "c": "qualitative",
+     "text": "Started the company's BI function as its first analyst, teaching himself Tableau and building the first reporting layer from nothing."
+    },
+    {
+     "id": "rc-02",
+     "tags": [
+      "viz",
+      "analytics"
+     ],
+     "c": "exact",
+     "text": "Analyzed Google Ads and Google Analytics data to understand site traffic, user interaction and the demographics of who was actually buying."
+    },
+    {
+     "id": "rc-03",
+     "tags": [
+      "stakeholder",
+      "founding",
+      "viz"
+     ],
+     "c": "qualitative",
+     "text": "Presented market analysis to the executive board that supported the decision to expand from a Brazil-only audience to Latin America and then to a global market."
+    },
+    {
+     "id": "rc-04",
+     "tags": [
+      "viz",
+      "stakeholder"
+     ],
+     "c": "exact",
+     "text": "Built dashboards and market studies on tourism and consumer behavior for Account Managers, tracking competitiveness across Latin America."
+    }
+   ]
+  }
+ ],
+ "education": [
+  {
+   "main": "Postgraduate, Data Science & AI",
+   "sub": "Uninter · 2025-2026"
+  },
+  {
+   "main": "Postgraduate, IT Leadership & Management",
+   "sub": "ESIC Business & Marketing School · 2023-2024"
+  },
+  {
+   "main": "Associate Degree, Marketing",
+   "sub": "Uninter · 2015-2017"
+  }
+ ],
+ "certificates": [
+  {
+   "main": "Data & Analytics Leadership",
+   "sub": "Itaú Learning Hub · 2025"
+  },
+  {
+   "main": "Data Products Associate",
+   "sub": "Itaú Learning Hub · 2024"
+  },
+  {
+   "main": "Professional Analytics Engineering",
+   "sub": "Itaú Learning Hub · 2023"
+  },
+  {
+   "main": "Data Modelling Associate",
+   "sub": "Itaú Learning Hub · 2023"
+  },
+  {
+   "main": "People Analytics",
+   "sub": "Numera · 2019"
+  },
+  {
+   "main": "Advanced SQL",
+   "sub": "Alura · 2019"
+  },
+  {
+   "main": "Tableau",
+   "sub": "Udemy · 2018"
+  }
+ ],
+ "languages": "Portuguese (native) · English (fluent - professional working proficiency)"
+};
+DATA = window.RESUME_DATA;
+render("people_analytics");
+</script>
+</body>
+</html>
